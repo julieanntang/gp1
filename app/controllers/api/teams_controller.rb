@@ -1,21 +1,22 @@
 class Api::TeamsController < ApplicationController
 
-def index
-  teams = Team.all
-  render json: teams
-end
+  def index
+    teams = Team.all
+    render json: teams
+  end
 
-def show
-  team = League.find(params[:id])
-  render json: team
-end
-
-def create
-  team = Team.new(team_params)
-  if team.save
+  def show
+    team = League.find(params[:id])
     render json: team
-  else
-    render json: {errors: team.errors}, status 422
+  end
+
+  def create
+    team = Team.new(team_params)
+    if team.save
+      render json: team
+    else
+      render json: {errors: team.errors}, status 422
+    end
   end
 
   def update
@@ -37,7 +38,7 @@ def create
   private
 
   def team_params
-    params.require(:team).permit(:name, :description)
+    params.require(:team).permit(:name, :location, :num)
   end
 
   def find_team 
@@ -47,4 +48,5 @@ def create
   def find_league
     @league = League.find(params[:league_id])
   end
+
 end
