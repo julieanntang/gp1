@@ -18,6 +18,7 @@ class Api::LeaguesController < ApplicationController
     else
       render json: {errors: league.errors}, status 422
     end
+  end
   
     def update
       league = League.find(params[:id])
@@ -38,7 +39,7 @@ class Api::LeaguesController < ApplicationController
     private
   
     def league_params
-      params.require(:league).permit(:name, :description)
+      params.require(:league).permit(:name, :description, :country)
     end
   
   
