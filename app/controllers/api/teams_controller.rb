@@ -17,6 +17,8 @@ def create
   else
     render json: {errors: team.errors}, status 422
   end
+end
+
 
   def update
     team = Team.find(params[:id])
@@ -37,7 +39,7 @@ def create
   private
 
   def team_params
-    params.require(:team).permit(:name, :description)
+    params.require(:team).permit(:name, :location, :num)
   end
 
   def find_team 
