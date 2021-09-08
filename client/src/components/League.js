@@ -1,10 +1,12 @@
 import React from "react";
-import Leagues from "./Leagues";
 
-const React = () => {
+
+const League = ({id, name, description, country}) => {
   return (
     <div>
-      <h1>League</h1>
+      <h1>{name}</h1>
+      <h2>{country}</h2>
+      <p>{description}</p>
     </div>
   );
 };
