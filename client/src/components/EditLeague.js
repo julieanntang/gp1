@@ -9,7 +9,6 @@ const EditLeague = (props) => {
 
   useEffect(() => {
     getLeague();
-
   }, []);
 
   const getLeague = async () => {
