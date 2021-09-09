@@ -1,6 +1,6 @@
 class Api::LeaguesController < ApplicationController
 
-  
+
   def index
     leagues = League.all
     render json: leagues
@@ -34,6 +34,8 @@ class Api::LeaguesController < ApplicationController
       league.destroy
   
       render json: league
+    else
+      render json: {errors: league.errors}, status 422
     end
   
     private
