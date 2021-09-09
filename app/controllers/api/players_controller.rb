@@ -1,11 +1,12 @@
 class Api::PlayersController < ApplicationController
 
-  # before_action :find_league
-  # before_action :find_team 
+  before_action :find_league
+  before_action :find_team 
   before_action :find_player, only: [:destroy, :update, :show] 
   
   def index
-    render json: Player.all
+    # render json: Player.all
+    render json: {league: @league, team: @team, player: @team.players}
   end
 
   def show
@@ -17,7 +18,7 @@ class Api::PlayersController < ApplicationController
     if @player.save
       render json: @player
     else
-      # render json: {errors: @player.errors}, status 422
+      # render json: {errors: @player.errors}, status: 422
     end
   end
 
@@ -25,7 +26,7 @@ class Api::PlayersController < ApplicationController
     if @player.update(team_params)
       render json: @player
     else
-      # render json: {errors: @player.errors}, status 422
+      # render json: {errors: @player.errors}, status: 422
     end
   end
 
@@ -40,14 +41,14 @@ class Api::PlayersController < ApplicationController
     params.require(:player).permit(:name, :position, :number)
   end
 
-  # def find_team 
-  #   @team = Team.find(params[:team_id])
-  # end
-
-  # def find_league
-  #   @league = League.find(params[:league_id])
-  # end
-
+  def find_league
+    @league = League.find(params[:league_id])
+  end
+  
+  def find_team 
+    @team = @league.teams.find(params[:team_id])
+  end
+  
   def find_player
     @player = Player.find(params[:id])
   end
