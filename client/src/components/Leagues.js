@@ -28,6 +28,7 @@ const Leagues = (props) => {
   return (
     <div>
       <h1>Leagues</h1>
+      <button onClick={() => props.history.push("/leagues/new")}>Add New League</button>
       {renderLeagues()}
     </div>
   );
