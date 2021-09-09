@@ -8,7 +8,7 @@ const Players  = (props) => {
   const [players, setPlayers] = useState([]);
   const [showform,setShowform]= useState(true)
   const league_id = 1; //Hard coded for now, needs to be passed down later
-  const team_id = 1;
+  const team_id = 2;
 
   useEffect(() =>{
     getPlayers();
@@ -28,7 +28,7 @@ const Players  = (props) => {
   const addPlayers = async (player) =>{
     try {
       let res = await axios.post( `/api/leagues/${league_id}/teams/${team_id}/players`, player)
-      setPlayers([res.data, ... players])
+      setPlayers([res.data.player, ... players])
     } catch (error) {
       console.log(error)
     }
@@ -70,7 +70,8 @@ const Players  = (props) => {
       <h1>Players</h1>
       <button onClick={() => setShowform(!showform)}> {showform?"Cancel Add Player":"Add Player"}</button>
     {showform && <PlayersForm
-      addPlayers={addPlayers}/>}
+      addPlayers={addPlayers}
+      />}
       {renderPlayers()}
     </div>
   )

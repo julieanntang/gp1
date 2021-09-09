@@ -12,6 +12,8 @@ const PlayersForm  = (props) => {
         props.editPlayers({id: props.id, name,position,number})
       }else{
       try {
+        console.log("hi")
+        console.log(props)
         props.addPlayers({name,position,number})
       } catch (error) {
         console.log(error)
@@ -21,22 +23,22 @@ const PlayersForm  = (props) => {
 
   return(
     <div>
-    <h1>New Player Form</h1>
+    <h1>{props.name ? "Edit Player":"New Player"}</h1>
     <form onSubmit={handleSubmit}>
     <p>Player Name</p>
     <input value={name}
     onChange = {(e) => {
       setName(e.target.value)}}
     />
-    <p>Player Position</p>
-    <input value={position}
-    onChange = {(e) => {
-      setPosition(e.target.value)}}
-    />
     <p>Player Number</p>
     <input value={number}
     onChange = {(e) => {
       setNumber(e.target.value)}}
+    />
+    <p>Player Position</p>
+    <input value={position}
+    onChange = {(e) => {
+      setPosition(e.target.value)}}
     />
     <button>Edit Player</button>
     </form>

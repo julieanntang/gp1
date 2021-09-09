@@ -14,11 +14,11 @@ class Api::PlayersController < ApplicationController
   end
 
   def create
-    @player = Player.new(player_params)
+    @player = @team.players.new(player_params)
     if @player.save
       render json: @player
     else
-      # render json: {errors: @player.errors}, status: 422
+      render json: {errors: @player.errors}, status: 422
     end
   end
 
@@ -26,7 +26,7 @@ class Api::PlayersController < ApplicationController
     if @player.update(player_params)
       render json: @player
     else
-      # render json: {errors: @player.errors}, status: 422
+      render json: {errors: @player.errors}, status: 422
     end
   end
 
@@ -43,10 +43,12 @@ class Api::PlayersController < ApplicationController
 
   def find_league
     @league = League.find(params[:league_id])
+    puts "past league"
   end
   
   def find_team 
     @team = @league.teams.find(params[:team_id])
+    puts "past team"
   end
   
   def find_player
