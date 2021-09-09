@@ -11,16 +11,15 @@ const Teams = (props) => {
     getTeams()
   }, [])
 
-
   //Dummy data for front end testing
   const dummyTeams = [
-    {id: 1, name: 'test', location: 'test location'},
-    {id: 2, name: 'test2', location: 'test location2'}
+    {id: 1, name: 'test', location: 'test location', league_id: props.league_id },
+    {id: 2, name: 'test2', location: 'test location2', league_id: props.league_id}
   ]
 
   const getTeams = async() => {
     try {
-      let res = await axios.get(`/api/leagues/${props.match.params.league_id}/teams`)
+      let res = await axios.get(`/api/leagues/${props.league_id}/teams`)
       setTeams(res.data)
     }catch(err){
       setTeams(dummyTeams)//setTeams to dummy data for from end testing
@@ -28,14 +27,21 @@ const Teams = (props) => {
     }
   }
   const newTeam = async (team) => {
+    console.log(team)
     try{
-      let res = await axios.post(`/api/leagues/${props.match.params.league_id}/teams`, team)
-      setTeams(res.data)
+      let res = await axios.post(`/api/leagues/${props.league_id}/teams`, team)
+      setTeams([team, ...teams])
     }catch(err){
       setTeams([{id: Math.random(), name: team.name, location: team.location},{name: 'test add', location: 'test add locatoin'}]) //just a front end test to make sure I am grabbing the name and location from the from
       console.log(err)
     }
   }
+
+  const updateTeams = (team) => {
+    const updatedTeams = teams.map((t) => t.id === team.id ? team : t)
+    setTeams(updatedTeams)
+  }
+  
 
   const deleteTeam = async (league_id, id) => {
     try{
@@ -58,7 +64,7 @@ const Teams = (props) => {
           <h3>{t.location}</h3>
           <p>Number of players: {t.num}</p>
           <button onClick={() => deleteTeam(t.league_id, t.id)}>Delete</button>
-          <TeamsEditForm setTeams={setTeams}/>
+          <TeamsEditForm updateTeams={updateTeams} {...t}/>
         </div>
       )
     })
