@@ -1,13 +1,22 @@
-import React from 'react'
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Route, Switch } from "react-router";
+import Players from "./components/Players";
+import PlayersForm from "./components/PlayersForm";
+import Player from "./components/Player";
 import Teams from './components/Teams';
+
 
 function App() {
   return (
-    <div className="App">
-      <Teams league_id={1} />
-    </div>
+    <>
+      <Switch>
+        <Route exact path="/leagues/:league_id/teams/" component={Teams} />
+        <Route exact path="/leagues/:league_id/teams/:team_id/players" component={Players} />
+        <Route exact path="/leagues/:league_id/teams/:team_id/players/new" component={PlayersForm} />
+        <Route exact path="/leagues/:league_id/teams/:team_id/players/:id" component={Player} />
+        <Route exact path="/leagues/:league_id/teams/:team_id/players/:id/edit" component={PlayersForm} />
+      </Switch>
+    </>
   );
 }
 

@@ -35,6 +35,8 @@ class Api::LeaguesController < ApplicationController
       league.destroy
   
       render json: league
+    else
+      render json: {errors: league.errors}, status 422
     end
   
     private
