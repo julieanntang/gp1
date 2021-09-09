@@ -31,7 +31,7 @@ class Api::PlayersController < ApplicationController
 
   def destroy
     @player.destroy
-    render json: team
+    render json: @player
   end
 
   private
