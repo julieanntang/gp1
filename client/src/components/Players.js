@@ -25,7 +25,7 @@ const Players  = (props) => {
       let res = await axios.post("/api/players", player)
       setPlayers([res.data,...players])
     } catch (error) {
-      
+      console.log(error)
     }
   }
 
