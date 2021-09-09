@@ -7,7 +7,7 @@ import Player from "./Player";
 const Players  = (props) => {
   const [players, setPlayers] = useState([]);
   const [showform,setShowform]= useState(true)
-  const league_id = 1;
+  const league_id = 1; //Hard coded for now, needs to be passed down later
   const team_id = 1;
 
   useEffect(() =>{
@@ -19,7 +19,7 @@ const Players  = (props) => {
       let res = await axios.get(`/api/leagues/${league_id}/teams/${team_id}/players`);
       setPlayers(res.data.player);
       console.log(res.data.player)
-
+      console.log(res.data)
     } catch (error) {
       console.log(error);
     };
@@ -35,8 +35,9 @@ const Players  = (props) => {
   }
 
   const editPlayers = async (player) =>{
+    console.log(players)
     try {
-      let res = await axios.put(`/api/leagues/${league_id}/teams/${team_id}/players/${props.id}`, player)
+      let res = await axios.put(`/api/leagues/${league_id}/teams/${team_id}/players/${player.id}`, player)
       let newPlayers = players.map((p)=> (p.id === player.id) ? player : p);
       setPlayers(newPlayers)
     } catch (error) {

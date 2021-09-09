@@ -9,7 +9,7 @@ const PlayersForm  = (props) => {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     if (props.id) {
-        props.editPlayers(props)
+        props.editPlayers({id: props.id, name,position,number})
       }else{
       try {
         props.addPlayers({name,position,number})

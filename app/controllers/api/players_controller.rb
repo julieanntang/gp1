@@ -14,7 +14,7 @@ class Api::PlayersController < ApplicationController
   end
 
   def create
-    @player = Player.new(team_params)
+    @player = Player.new(player_params)
     if @player.save
       render json: @player
     else
@@ -23,7 +23,7 @@ class Api::PlayersController < ApplicationController
   end
 
   def update
-    if @player.update(team_params)
+    if @player.update(player_params)
       render json: @player
     else
       # render json: {errors: @player.errors}, status: 422
