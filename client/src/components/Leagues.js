@@ -4,6 +4,7 @@ import League from "./League";
 
 
 const Leagues = (props) => {
+
   const [leagues, setLeagues] = useState([]);
   useEffect(() => {
     getLeagues();
@@ -21,8 +22,19 @@ const Leagues = (props) => {
   };
 
   const renderLeagues = () => {
-    return leagues.map((l) => <League key={l.id} {...l} />);
+    return leagues.map((l) => <League deleteLeague={deleteLeague} key={l.id} {...l} />);
   };
+
+  const deleteLeague = async (id) => {
+    try {
+      let res = await axios.delete(`/api/leagues/${id}`);
+      let filterLeagues = leagues.filter((l) => l.id !== id);
+      setLeagues(filterLeagues);
+    } catch (error) {
+      alert(error);
+      console.log("error");
+    }
+  }
 
 
   return (

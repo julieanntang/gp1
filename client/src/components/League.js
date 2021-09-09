@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router";
 
 
-const League = ({id, name, description, country}) => {
+const League = ({id, name, description, country, deleteLeague}) => {
 
   const history = useHistory();
 
@@ -12,6 +12,7 @@ const League = ({id, name, description, country}) => {
       <h2>{country}</h2>
       <p>{description}</p>
       <button onClick={() => history.push(`/leagues/${id}/edit`)}>Update</button>
+      <button onClick={() => deleteLeague(id)}>Delete</button>
     </div>
   );
 };
