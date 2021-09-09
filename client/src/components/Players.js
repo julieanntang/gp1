@@ -3,12 +3,15 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import PlayersForm from "./PlayersForm";
 import Player from "./Player";
+import { useHistory } from "react-router";
 
 const Players  = (props) => {
+  const history = useHistory()
   const [players, setPlayers] = useState([]);
   const [showform,setShowform]= useState(false)
+  const [team, setTeam] = useState('')
   const league_id = 1; //Hard coded for now, needs to be passed down later
-  const team_id = 2;
+  const team_id = props.match.params.team_id
 
   useEffect(() =>{
     getPlayers();
@@ -18,6 +21,7 @@ const Players  = (props) => {
     try {
       let res = await axios.get(`/api/leagues/${league_id}/teams/${team_id}/players`);
       setPlayers(res.data.player);
+      setTeam(res.data.team)
       console.log(res.data.player)
       console.log(res.data)
     } catch (error) {
@@ -67,7 +71,8 @@ const Players  = (props) => {
 
   return (
     <div>
-      <h1>Players</h1>
+      <h1>{team.name}</h1>
+      <div onClick={() => history.goBack()}>Back</div>
       <button onClick={() => setShowform(!showform)}> {showform?"Cancel Add Player":"Add Player"}</button>
     {showform && <PlayersForm
       addPlayers={addPlayers}
