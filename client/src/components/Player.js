@@ -5,7 +5,7 @@ import PlayersForm from "./PlayersForm";
 const Player = (props) => {
   const {team_id,id,name,number,position,deletePlayer,editPlayers} = props;
   console.log(props)
-  const [showform, setShowform] = useState(true)
+  const [showform, setShowform] = useState(false)
 
   return(
     <div style={{margin:"10px", padding: "10px", backgroundColor: "lightblue"}} key={id}>

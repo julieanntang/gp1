@@ -6,7 +6,7 @@ import Player from "./Player";
 
 const Players  = (props) => {
   const [players, setPlayers] = useState([]);
-  const [showform,setShowform]= useState(true)
+  const [showform,setShowform]= useState(false)
   const league_id = 1; //Hard coded for now, needs to be passed down later
   const team_id = 2;
 

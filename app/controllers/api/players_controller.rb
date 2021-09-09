@@ -38,7 +38,7 @@ class Api::PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:name, :position, :number)
+    params.require(:player).permit(:name, :position, :number, :team_id)
   end
 
   def find_league

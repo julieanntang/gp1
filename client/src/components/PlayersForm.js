@@ -5,14 +5,14 @@ const PlayersForm  = (props) => {
   const[name, setName] = useState(props.name ? props.name : "");
   const[number, setNumber] = useState(props.number ? props.number : "");
   const[position, setPosition] = useState(props.position ? props.position: "");
+  const[team_id, setTeam_id] = useState(props.team_id ? props.team_id: "");
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
     if (props.id) {
-        props.editPlayers({id: props.id, name,position,number})
+        props.editPlayers({id: props.id, name,position,number,team_id})
       }else{
       try {
-        console.log("hi")
         console.log(props)
         props.addPlayers({name,position,number})
       } catch (error) {
@@ -39,6 +39,11 @@ const PlayersForm  = (props) => {
     <input value={position}
     onChange = {(e) => {
       setPosition(e.target.value)}}
+    />
+    <p>Player Team</p>
+    <input value={team_id}
+    onChange = {(e) => {
+      setTeam_id(e.target.value)}}
     />
     <button>Edit Player</button>
     </form>
