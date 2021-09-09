@@ -6,7 +6,7 @@ import Teams from './components/Teams';
 function App() {
   return (
     <div className="App">
-      <Teams />
+      <Teams league_id={1} />
     </div>
   );
 }

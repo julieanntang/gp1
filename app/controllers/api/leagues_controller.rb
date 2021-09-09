@@ -16,7 +16,7 @@ class Api::LeaguesController < ApplicationController
     if league.save
       render json: league
     else
-      render json: {errors: league.errors}, status 422
+      render json: {errors: league.errors}, status: 422
     end
   end
 
@@ -26,7 +26,7 @@ class Api::LeaguesController < ApplicationController
       if league.update(league_params)
         render json: league
       else
-        render json: {errors: league.errors}, status 422
+        render json: {errors: league.errors}, status: 422
       end
     end
   

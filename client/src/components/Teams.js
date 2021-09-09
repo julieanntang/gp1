@@ -20,7 +20,7 @@ const Teams = (props) => {
 
   const getTeams = async() => {
     try {
-      let res = await axios.get('/api/teams')
+      let res = await axios.get(`/api/leagues/${props.match.params.league_id}/teams`)
       setTeams(res.data)
     }catch(err){
       setTeams(dummyTeams)//setTeams to dummy data for from end testing
@@ -32,7 +32,7 @@ const Teams = (props) => {
       let res = await axios.post(`/api/leagues/${props.match.params.league_id}/teams`, team)
       setTeams(res.data)
     }catch(err){
-      setTeams([{name: team.name, location: team.location},{name: 'test add', location: 'test add locatoin'}]) //just a front end test to make sure I am grabbing the name and location from the from
+      setTeams([{id: Math.random(), name: team.name, location: team.location},{name: 'test add', location: 'test add locatoin'}]) //just a front end test to make sure I am grabbing the name and location from the from
       console.log(err)
     }
   }
