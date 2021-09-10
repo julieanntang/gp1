@@ -12,23 +12,6 @@ l = League.create(name: "World Soccer League", description: "The best soccer lea
 
 require "faker"
 
-# 10.times do
-#   League.teams.create(
-#     name: Faker::Sports::Football.team,
-#     location: Faker::Address.city,
-#     num: 10,
-
-#       10.times do
-#         League.teams.players.create(
-#           name: Faker::Sports::Football.player,
-#           position: Faker::Sports::Football.position,
-#           number: Faker::Number.between(from: 0, to: 99)
-#         )
-#       end
-      
-#     )
-# end
-
 10.times do
   t = l.teams.create(name: Faker::Sports::Football.team, location: Faker::Address.city, num: 10)
   10.times do
