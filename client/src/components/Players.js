@@ -10,7 +10,7 @@ const Players  = (props) => {
   const [players, setPlayers] = useState([]);
   const [showform,setShowform]= useState(false)
   const [team, setTeam] = useState('')
-  const league_id = 1; //Hard coded for now, needs to be passed down later
+  const league_id = props.match.params.league_id;
   const team_id = props.match.params.team_id
 
   useEffect(() =>{
@@ -72,7 +72,7 @@ const Players  = (props) => {
   return (
     <div>
       <h1>{team.name}</h1>
-      <div onClick={() => history.goBack()}>Back</div>
+      <button onClick={() => history.goBack()}>Back</button><br></br>
       <button onClick={() => setShowform(!showform)}> {showform?"Cancel Add Player":"Add Player"}</button>
     {showform && <PlayersForm
       addPlayers={addPlayers}

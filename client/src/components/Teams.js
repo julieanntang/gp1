@@ -3,11 +3,15 @@ import axios from 'axios'
 import TeamsNewForm from './TeamsNewForm'
 import TeamsEditForm from './TeamsEditForm'
 import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router'
 
 const Teams = (props) => {
-  const league_id = 1
+  const league_id = props.match.params.league_id
+  console.log(props);
 
   const [teams, setTeams] = useState([])
+
+  const history = useHistory()
 
   useEffect(() => {
     getTeams()
@@ -59,6 +63,7 @@ const Teams = (props) => {
 
   const renderTeams = () => {
     return teams.map((t) => {
+      console.log(t)
       return (
         <div key={t.id}>
           <h1>{t.name}</h1>
@@ -75,6 +80,7 @@ const Teams = (props) => {
   return (
     <div>
       <h2>Teams</h2>
+      <button onClick={() => history.goBack()}>Back</button>
       <TeamsNewForm  newTeam={newTeam}/>
       {renderTeams()}
     </div>

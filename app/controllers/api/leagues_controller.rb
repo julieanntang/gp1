@@ -31,11 +31,11 @@ class Api::LeaguesController < ApplicationController
   
     def destroy
       league = League.find(params[:id])
-      league.destroy
-  
-      render json: league
-    else
-      render json: {errors: league.errors}, status 422
+      if league.destroy
+         render json: league
+      else
+        render json: {errors: league.errors}
+      end
     end
   
     private
