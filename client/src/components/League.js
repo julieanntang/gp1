@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
+import { Button, Card } from "semantic-ui-react";
 
 
 const League = ({id, name, description, country, deleteLeague}) => {
@@ -7,14 +8,14 @@ const League = ({id, name, description, country, deleteLeague}) => {
   const history = useHistory();
 
   return (
-    <div>
+    <Card style={{margin:'20px'}}>
       <h1>{name}</h1>
       <h2>{country}</h2>
       <p>{description}</p>
-      <button onClick={() => history.push(`/leagues/${id}/teams`)}>View Teams</button>
-      <button onClick={() => history.push(`/leagues/${id}/edit`)}>Update</button>
-      <button onClick={() => deleteLeague(id)}>Delete</button>
-    </div>
+      <Button onClick={() => history.push(`/leagues/${id}/teams`)}>View Teams</Button>
+      <Button onClick={() => history.push(`/leagues/${id}/edit`)}>Update</Button>
+      <Button onClick={() => deleteLeague(id)}>Delete</Button>
+    </Card>
   );
 };
 

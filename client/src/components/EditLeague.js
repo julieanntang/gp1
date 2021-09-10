@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { Button } from "semantic-ui-react";
 
 const EditLeague = (props) => {
 
@@ -46,9 +47,9 @@ const EditLeague = (props) => {
         <input defaultValue={description} onChange={(e) => setDescription(e.target.value)} />
         <p>Country:</p>
         <input defaultValue={country} onChange={(e) => setCountry(e.target.value)} /><br />
-        <button type="submit">Update</button>
+        <Button type="submit">Update</Button>
       </form>
-      <button onClick={() => props.history.goBack()}>go back</button>
+      <Button onClick={() => props.history.goBack()}>go back</Button>
     </div>
   );
 };

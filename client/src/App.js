@@ -1,4 +1,5 @@
 import './App.css';
+import 'semantic-ui-css/semantic.min.css'
 import { Switch, Route } from "react-router-dom";
 import LeagueForm from './components/LeagueForm';
 import Leagues from './components/Leagues';
@@ -9,6 +10,8 @@ import Player from "./components/Player";
 import Teams from './components/Teams';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
+
+
 
 
 function App() {

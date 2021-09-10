@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button, Card } from "semantic-ui-react";
 import PlayersForm from "./PlayersForm";
 
 
@@ -8,14 +9,14 @@ const Player = (props) => {
   const [showform, setShowform] = useState(false)
 
   return(
-    <div style={{margin:"10px", padding: "10px", backgroundColor: "lightblue"}} key={id}>
+    <Card style={{margin:'20px'}} key={id}>
     <h3>Team: {team_id}</h3>
     <p>{name}</p>
     <p>Player Number {number}</p>
     <p>Player Position {position}</p>
     <p>League Player ID: {id}</p>
-    <button onClick={() => deletePlayer(id)}> delete player</button>
-    <button onClick={() => setShowform(!showform)}> {showform?"Cancel Edit Player":"Edit Player"}</button>
+    <Button onClick={() => deletePlayer(id)}> delete player</Button>
+    <Button onClick={() => setShowform(!showform)}> {showform?"Cancel Edit Player":"Edit Player"}</Button>
     {showform && <PlayersForm
     id = {id}
     team_id = {team_id}
@@ -24,7 +25,7 @@ const Player = (props) => {
     position = {position}
     editPlayers = {editPlayers}
     />}
-    </div>
+    </Card>
   )}
 
 export default Player

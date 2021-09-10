@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import League from "./League";
+import { Button } from "semantic-ui-react";
 
 
 const Leagues = (props) => {
@@ -40,8 +41,10 @@ const Leagues = (props) => {
   return (
     <div>
       <h1>Leagues</h1>
-      <button onClick={() => props.history.push("/leagues/new")}>Add New League</button>
+      <Button onClick={() => props.history.push("/leagues/new")}>Add New League</Button>
+      <div className='container'>
       {renderLeagues()}
+      </div>
     </div>
   );
 };

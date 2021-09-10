@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import PlayersForm from "./PlayersForm";
 import Player from "./Player";
 import { useHistory } from "react-router";
+import { Button } from "semantic-ui-react";
 
 const Players  = (props) => {
   const history = useHistory()
@@ -72,12 +73,16 @@ const Players  = (props) => {
   return (
     <div>
       <h1>{team.name}</h1>
-      <button onClick={() => history.goBack()}>Back</button><br></br>
-      <button onClick={() => setShowform(!showform)}> {showform?"Cancel Add Player":"Add Player"}</button>
+      <Button onClick={() => history.goBack()}>Back</Button><br></br>
+      <Button onClick={() => setShowform(!showform)}> {showform?"Cancel Add Player":"Add Player"}</Button>
+      <div className='container'>
     {showform && <PlayersForm
       addPlayers={addPlayers}
       />}
+      </div>
+      <div className='container'>
       {renderPlayers()}
+      </div>
     </div>
   )
 

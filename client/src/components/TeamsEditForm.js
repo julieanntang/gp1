@@ -1,6 +1,7 @@
 
 import axios from 'axios'
 import React, { useState } from 'react'
+import { Button } from 'semantic-ui-react'
 
 const TeamsEditForm = (props) => {
   const [name, setName] = useState('')
@@ -11,10 +12,8 @@ const TeamsEditForm = (props) => {
     e.preventDefault()
     try{
       let res = await axios.put(`/api/leagues/${props.league_id}/teams/${props.id}`, { name, location, num })
-      // console.log(res.data)
       props.updateTeams(res.data)
     }catch(err){
-      // props.updateTeams([{id: props.id, name: name, location: location, num: num}]) //just a front end test to make sure I am grabbing the name and location from the from
       console.log(err)
     }
   }
@@ -27,8 +26,8 @@ const TeamsEditForm = (props) => {
         <p>Edit Team Location</p>
         <input value={location} onChange={(e)=> {setLocation(e.target.value)}} />
         <p>Edit Number of players</p>
-        <input value={num} onChange={(e) => {setNum(e.target.value)}} />
-        <button type="submit">Update</button>
+        <input value={num} onChange={(e) => {setNum(e.target.value)}} /><br/><br/>
+        <Button type="submit">Update</Button>
       </form>
     </>
   )

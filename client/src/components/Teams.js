@@ -4,31 +4,23 @@ import TeamsNewForm from './TeamsNewForm'
 import TeamsEditForm from './TeamsEditForm'
 import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router'
+import { Button, Card } from 'semantic-ui-react'
 
 const Teams = (props) => {
   const league_id = props.match.params.league_id
-  console.log(props);
-
   const [teams, setTeams] = useState([])
-
+  const [showform, setShowform] = useState(false)
   const history = useHistory()
 
   useEffect(() => {
     getTeams()
   }, [])
 
-  //Dummy data for front end testing
-  const dummyTeams = [
-    {id: 1, name: 'test', location: 'test location', league_id: league_id },
-    {id: 2, name: 'test2', location: 'test location2', league_id: league_id}
-  ]
-
   const getTeams = async() => {
     try {
       let res = await axios.get(`/api/leagues/${league_id}/teams`)
       setTeams(res.data)
     }catch(err){
-      setTeams(dummyTeams)//setTeams to dummy data for from end testing
       console.log(err)
     }
   }
@@ -38,7 +30,6 @@ const Teams = (props) => {
       let res = await axios.post(`/api/leagues/${league_id}/teams`, team)
       setTeams([team, ...teams])
     }catch(err){
-      setTeams([{id: Math.random(), name: team.name, location: team.location},{name: 'test add', location: 'test add locatoin'}]) //just a front end test to make sure I am grabbing the name and location from the from
       console.log(err)
     }
   }
@@ -55,8 +46,6 @@ const Teams = (props) => {
       let filteredTeams = teams.filter((t) => t.id != id)
       setTeams(filteredTeams)
     }catch(err) {
-      let filteredTeams = teams.filter((t) => t.id != id)
-      setTeams(filteredTeams)  // test for front end
       console.log(err)
     }
   }
@@ -65,24 +54,29 @@ const Teams = (props) => {
     return teams.map((t) => {
       console.log(t)
       return (
-        <div key={t.id}>
+        <Card style={{margin:'20px'}} key={t.id}> 
           <h1>{t.name}</h1>
           <h3>{t.location}</h3>
           <p>Number of players: {t.num}</p>
-          <button onClick={() => props.history.push(`/leagues/${t.league_id}/teams/${t.id}/players`)}>See Players</button>
-          <button onClick={() => deleteTeam(t.league_id, t.id)}>Delete</button>
+          <Button onClick={() => props.history.push(`/leagues/${t.league_id}/teams/${t.id}/players`)}>See Players</Button>
+          <Button onClick={() => deleteTeam(t.league_id, t.id)}>Delete</Button>
           <TeamsEditForm updateTeams={updateTeams} {...t}/>
-        </div>
+        </Card>
       )
     })
   }
 
   return (
-    <div>
+    <div >
       <h2>Teams</h2>
-      <button onClick={() => history.goBack()}>Back</button>
-      <TeamsNewForm  newTeam={newTeam}/>
+      <Button onClick={() => history.goBack()}>Back</Button>
+      <Button onClick={() => setShowform(!showform)}>{showform ? "Cancel" :"New" }</Button>
+      <div className='container'>
+      {showform && <TeamsNewForm  newTeam={newTeam}/>}
+      </div>
+      <div className='container'>
       {renderTeams()}
+      </div>
     </div>
   )
 }

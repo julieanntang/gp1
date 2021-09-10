@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Button, Card } from "semantic-ui-react";
 
 const PlayersForm  = (props) => {
   const[name, setName] = useState(props.name ? props.name : "");
@@ -22,7 +23,7 @@ const PlayersForm  = (props) => {
   }
 
   return(
-    <div>
+    <Card>
     <h1>{props.name ? "Edit Player":"New Player"}</h1>
     <form onSubmit={handleSubmit}>
     <p>Player Name</p>
@@ -44,10 +45,10 @@ const PlayersForm  = (props) => {
     <input value={team_id}
     onChange = {(e) => {
       setTeam_id(e.target.value)}}
-    />
-    <button>Edit Player</button>
+    /><br/><br/>
+    <Button>Edit Player</Button>
     </form>
-    </div>
+    </Card>
   )
 }
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Button, Card } from "semantic-ui-react";
 
 const LeagueForm = (props) => {
 
@@ -20,7 +21,8 @@ const LeagueForm = (props) => {
   };
 
   return (
-    <div>
+    <div className='container'>
+    <Card>
       <h2>Add New League</h2>
       <form onSubmit={handleSubmit}>
         <p>Name:</p>
@@ -29,9 +31,10 @@ const LeagueForm = (props) => {
         <input value={description} onChange={(e) => setDescription(e.target.value)} />
         <p>Country:</p>
         <input value={country} onChange={(e) => setCountry(e.target.value)} /><br />
-        <button type="submit">Add</button>
+        <Button type="submit">Add</Button>
       </form>
-      <button onClick={() => props.history.goBack()}>go back</button>
+      <Button onClick={() => props.history.goBack()}>go back</Button>
+    </Card>
     </div>
   );
 };
